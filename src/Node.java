@@ -3,7 +3,8 @@ package src;
 public class Node<E> {
 
     E data;
-    Node<E> next;
+     Node<E> next;
+     Node<E> prev;
 
     // Constructor
     Node() {
@@ -18,4 +19,9 @@ public class Node<E> {
     public void setNext(Node<E> next) {
         this.next = next;
     }
+
+    public void setPrev(Node<E> prev) {
+        this.prev = prev;
+    }
+
 }
