@@ -17,6 +17,11 @@ public class LinkedForLox<E>{
         this.size++;
     }
     public E get(int index) throws IndexOutOfBoundsException {
+        Node<E> node = getNode(index);
+        return node.data;
+    }
+
+    private Node<E> getNode(int index) {
         if (index > this.size - 1 || index < 0) {
             throw new IndexOutOfBoundsException();
         }
@@ -37,69 +42,33 @@ public class LinkedForLox<E>{
                 count--;
             }
         }
-        return node.data;
+        return node;
     }
 
     public void set(E data, int index) throws IndexOutOfBoundsException {
-        if (index > this.size -1 || index < 0) {
-            throw new IndexOutOfBoundsException();
-        }
-        Node<E> node;
-        int count;
-        if (this.size / 2 > index) {
-            node = this.first;
-            count = 0;
-            while (count != index) {
-                node = node.next;
-                count++;
-            }
-        } else {
-            node = this.last;
-            count = this.size - 1;
-            while (count != index) {
-                node = node.prev;
-                count--;
-            }
-        }
+        Node<E> node = getNode(index);
         node.data = data;
     }
 
     public void remove(int index){
-        if (index > this.size - 1 || index < 0) {
-            throw new IndexOutOfBoundsException();
-        }
+        Node<E> newNode = null;
         if (index == 0 && this.first != null){
             this.first = this.first.next;
             size--;
         } else if (index == this.size - 1) {
             this.last = this.last.prev;
+            this.last.next = null;
             size--;
         }else {
-            Node<E> node;
-            int count;
-
-            if (this.size / 2 > index) {
-                node = this.first;
-                count = 0;
-                while (count != index) {
-                    node = node.next;
-                    count++;
-                }
-            } else {
-                node = this.last;
-                count = this.size - 1;
-                while (count != index) {
-                    node = node.prev;
-                    count--;
-                }
-            }
-            node.prev = node.next;
+            Node<E> node = getNode(index);
+            newNode = node.prev;
+            newNode.next = node.next;
             size--;
         }
     }
     public void print(){
         Node<E> node = this.first;
-        if (node == null) {
+        if (node.next == null) {
             System.out.println("[]");
         } else {
             while (node != null) {
@@ -108,7 +77,6 @@ public class LinkedForLox<E>{
             }
         }
     }
-
     public int getSize() {
         return size;
     }
