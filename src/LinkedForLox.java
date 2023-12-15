@@ -108,6 +108,10 @@ public class LinkedForLox<E>{
             }
         }
     }
+
+    public int getSize() {
+        return size;
+    }
 }
 
 
