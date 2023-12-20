@@ -6,15 +6,15 @@ public class LinkedForLox<E>{
     private int size = 0;
     public void add(E data){
         Node<E> node = new Node<>(data);
-        if (this.first==null) {
-            this.first = node;
-            this.last = this.first;
+        if (first==null) {
+            first = node;
+            last = first;
         } else {
-            this.last.next = node;
-            node.prev = this.last;
-            this.last = node;
+            last.next = node;
+            node.prev = last;
+            last = node;
         }
-        this.size++;
+        size++;
     }
     public E get(int index) throws IndexOutOfBoundsException {
         Node<E> node = getNode(index);
@@ -22,21 +22,21 @@ public class LinkedForLox<E>{
     }
 
     private Node<E> getNode(int index) {
-        if (index > this.size - 1 || index < 0) {
+        if (index > size - 1 || index < 0) {
             throw new IndexOutOfBoundsException();
         }
         Node<E> node;
         int count;
-        if (this.size / 2 > index) {
-            node = this.first;
+        if (size / 2 > index) {
+            node = first;
             count = 0;
             while (count != index) {
                 node = node.next;
                 count++;
             }
         } else {
-            node = this.last;
-            count = this.size - 1;
+            node = last;
+            count = size - 1;
             while (count != index) {
                 node = node.prev;
                 count--;
@@ -52,12 +52,12 @@ public class LinkedForLox<E>{
 
     public void remove(int index){
         Node<E> newNode = null;
-        if (index == 0 && this.first != null){
-            this.first = this.first.next;
+        if (index == 0 && first != null){
+            first = first.next;
             size--;
-        } else if (index == this.size - 1) {
-            this.last = this.last.prev;
-            this.last.next = null;
+        } else if (index == size - 1) {
+            last = last.prev;
+            last.next = null;
             size--;
         }else {
             Node<E> node = getNode(index);
@@ -67,7 +67,7 @@ public class LinkedForLox<E>{
         }
     }
     public void print(){
-        Node<E> node = this.first;
+        Node<E> node = first;
         if (node.next == null) {
             System.out.println("[]");
         } else {

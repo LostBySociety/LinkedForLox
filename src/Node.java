@@ -17,11 +17,11 @@ public class Node<E> {
     }
 
     public void setNext(Node<E> next) {
-        this.next = next;
+        next = next;
     }
 
     public void setPrev(Node<E> prev) {
-        this.prev = prev;
+        prev = prev;
     }
 
 }
